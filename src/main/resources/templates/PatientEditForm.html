@@ -1,0 +1,42 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+    <head>
+        <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      />
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+      />
+    </head>
+    <h2>WELCOME TO PATIENT REGISTER</h2>
+    <body>
+        <div class="container">
+        <form th:action="@{/patient/update}" method="POST" th:object="${patient}">
+  ID:<input type="text" th:field="*{id}" id="id" class="form-control" readonly>
+Name:<input type="text" th:field="*{name}" id="name" class="form-control">
+Gender:<input type="radio" th:field="*{Gender}" id="Gender1" value="Male" > Male
+        <input type="radio" th:field="*{Gender}" id="Gender2" value="FeMale" > FeMale
+        <input type="radio" th:field="*{Gender}" id="Gender3" value="Others" > Others<br>
+Mobile:<input type="text" th:field="*{number}" id="number" class="form-control">
+Date Of Birth:<input type="text" th:field="*{dob}" id="dob" class="form-control">
+Marial Status:<input type="radio" th:field="*{marridStatus}" id="marridStatus1" value="Marrid" > Marrid
+                 <input type="radio" th:field="*{marridStatus}" id="marridStatus2" value="UnMarried" >UnMarried<br>
+Prasent Address:<textarea th:field="*{presentAddress}" id="presentAddress" class="form-control"></textarea>
+Communication Address:<textarea  th:field="*{communicationAddress}" id="communicationAddress" class="form-control"></textarea>
+Past Medical History:
+ <input type="checkbox" th:field="*{pastMedicalHistory}"  id="pastMedicalHistory1" value="Anemia" >Anemia
+<input type="checkbox" th:field="*{pastMedicalHistory}"  id="pastMedicalHistory2" value="Asthma" >Asthma
+<input type="checkbox" th:field="*{pastMedicalHistory}" id="pastMedicalHistory3"  value="Diabetes" >Diabetes
+<input type="checkbox" th:field="*{pastMedicalHistory}"  id="pastMedicalHistory4" value="Cancer">Cancer
+<input type="checkbox" th:field="*{pastMedicalHistory}"  id="pastMedicalHistory5" value="Ulcer">Ulcer
+<input type="checkbox" th:field="*{pastMedicalHistory}" id="pastMedicalHistory6" value="ChickenPox">ChickenPox
+<input type="checkbox" th:field="*{pastMedicalHistory}" id="pastMedicalHistory7" value="Others">Others<br>
+Other Details:<textarea th:field="*{othersDetails}" id="othersDetails" class="form-control"></textarea>
+<button class="btn btn-primary">UpDate</button>
+</form>
+</div>
+</body>
+</html>
