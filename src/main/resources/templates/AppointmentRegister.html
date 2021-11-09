@@ -1,0 +1,86 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+  <head>
+   <div th:replace="/fragments/commonui :: links"></div>
+  </head>
+  <body>
+  <div th:replace="/fragments/commonui :: menubar"></div>
+    <div class="container">
+      <div class="card">
+        <div class="card-header bg-primary text-center text-white">
+          <h4>WELCOME TO APPOINTMENT REGISTER PAGE</h4>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/appointment/save}" method="POST" >
+             <!-- row#0 -->
+                   <div class="row">
+                        <div class="col-2">
+                            <label for="date">DOCTOR NAME</label>
+                        </div>
+                        <div class="col-4">
+                            <select name="doctor.id" id="doctor" class="form-control">
+                            <option value="">---SELECT---</option>
+                            <option th:each="ob:${doctores}" th:value="${ob.key}" th:text="${ob.value}"></option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <span id="dateError"></span>
+                        </div>
+                </div>
+           		 <!-- row#0 -->
+                   <div class="row">
+                        <div class="col-2">
+                            <label for="date">DATE</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="date" name="date" id="date" class="form-control" />
+                        </div>
+                        <div class="col-6">
+                            <span id="dateError"></span>
+                        </div>
+                </div>
+                <!-- row#1 -->
+                <div class="row">
+                    <div class="col-2">
+                        <label for="noOfSlots">NO OF SLOTS</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" name="noOfSlots" id="noOfSlots"class="form-control"/>
+                    </div>
+                    <div class="col-6">
+                        <span id="noOfSlotsError"></span>
+                    </div>
+                </div>
+
+                 <!-- row#2 -->
+                 <div class="row">
+                    <div class="col-2">
+                        <label for="consultFee">CONSULTATION FEE</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" name="consultFee" id="consultFee" class="form-control"/>
+                    </div>
+                    <div class="col-6">
+                        <span id="consultFeeError"></span>
+                    </div>
+                </div>
+
+                <!-- row#3 -->
+                <div class="row">
+                    <div class="col-2">
+                        <label for="note">DISCRIPTION</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" name="note" id="note" class="form-control"/>
+                    </div>
+                    <div class="col-6">
+                        <span id="noteError"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">CREATE </button>
+            </form>
+        </div>
+     <div th:if="${message!=null}"class="card-footer bg-primary text-center text-white"><span>[[${message}]]</span></div>
+      </div>
+    </div>
+  </body>
+</html>

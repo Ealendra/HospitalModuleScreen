@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import in.hsp.babu.entity.Patient;
@@ -53,6 +55,13 @@ public class PatientServiceImpl implements PatientService {
 		
 		 repo.save(patient);
 		
+	}
+	 
+	 //For Pagination concept.
+	 @Override
+	public Page<Patient> getAllPatientRecords(Pageable pageable) {
+		
+		return repo.findAll(pageable);
 	}
 	
 

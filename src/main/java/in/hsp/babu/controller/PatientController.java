@@ -3,6 +3,9 @@ package in.hsp.babu.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,13 +39,29 @@ public class PatientController {
 		return"PatientRegisterForm";
 		
 	}
-	@GetMapping("/data")
+	//@GetMapping("/data")
 	public String getAll(@ModelAttribute Patient patient,Model model)
 	{
 		List<Patient> list=service.getAllPatients();
 		        model.addAttribute("list",list);
 		return"PatientAllData";
 	}
+	
+	//Pegination method.
+	@GetMapping("/data")
+	public String getAllPeginations(@PageableDefault(page=0,size=4)Pageable pageable,Model model,
+			                        @RequestParam(value="message",required=false)String message)
+	{
+		Page<Patient> page=service.getAllPatientRecords(pageable);
+		
+		model.addAttribute("list", page.getContent());
+		model.addAttribute("page", page);
+		model.addAttribute("message", message);
+		return"PatientAllData";
+	}
+	
+	
+	
 	@GetMapping("/delete")
 	public String deleteFormData(@RequestParam Integer id,Model model)
 	{
@@ -52,7 +71,6 @@ public class PatientController {
 		model.addAttribute("message",message);
 		List<Patient> list=service.getAllPatients();
         model.addAttribute("list",list);
-        
 		return"PatientAllData";
 	}
 	
@@ -69,6 +87,6 @@ public class PatientController {
 		service.updateData(patient);
 		model.addAttribute(patient);
 		return"redirect:data";
-	}
+	}	
 
 }

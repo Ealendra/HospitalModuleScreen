@@ -1,0 +1,67 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <div th:replace="/fragments/commonui :: links"></div>
+</head>
+
+<body>
+ <div th:replace="/fragments/commonui :: menubar"></div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-secondary text-center text-white">
+                <h3>Welcome To Doctor Data Page</h3>
+            </div>
+            <div class="card-body">
+                <form >
+                    <table class="table table-hover bg-info">
+                        <tr class="bg-secondary text-white text-center">
+                            <th>Id</th>
+                            <th>Date</th>
+                            <th>No Of Slots</th>
+                            <th>Consult Fess</th>
+                            <th>Discription</th>
+                            <th>Operations</th>
+                        </tr>
+                        <tr th:each="ob:${list}" class="text-block text-center bg-light">
+                        <td>[[${ob.id}]]</td>
+                        <td>[[${ob.date}]]</td>
+                        <td>[[${ob.noOfSlots}]]</td>
+                        <td>[[${ob.consultFee}]]</td>
+                        <td>[[${ob.note}]]</td>
+                        <td><a th:href="@{/appointment/delete(id=${ob.id})}" class="btn btn-secondary text-white"> DELETE </a> |
+                            <a th:href="@{/appointment/edit(id=${ob.id})}" class="btn btn-secondary text-white"> EDIT </a>
+                        </td>
+                        </tr>
+                    </table>
+            <hr/>
+
+                <nav aria-label="Page navigation example ">
+  					<ul class="pagination justify-content-center">
+  					    <li class="page-item" th:if="${!page.isFirst()}">
+    					  <a class="page-link"  th:href="@{/appointment/data(page=0)}">First</a>
+    					</li>
+    					<li class="page-item" th:if="${page.hasPrevious()}">
+    					  <a class="page-link"  th:href="@{/appointment/data(page=${page.number-1})}">Previous</a>
+    					</li>
+
+    					<th:block th:each="i:${#numbers.sequence(0,page.totalPages-1)}">
+    						<li class="page-item">
+    						   <a class="page-link" th:href="@{/appointment/data(page=${i})}">[[${i+1}]]</a>
+    						</li>
+    					</th:block>
+    					<li class="page-item" th:if="${page.hasNext()}">
+    					  <a class="page-link"  th:href="@{/appointment/data(page=${page.number+1})}">Next</a>
+    					</li>
+    					<li class="page-item" th:if="${!page.isLast()}">
+    					  <a class="page-link"  th:href="@{/appointment/data(page=${page.totalPages-1})}">Last</a>
+    					</li>
+  					</ul>
+				</nav>         
+                    
+                </form>
+            </div>
+      <div th:if="${message!=null}" class="card-footer bg-secondary text-center text-white"><span>[[${message}]]</span></div>
+        </div>
+    </div>
+</body>
+</html>

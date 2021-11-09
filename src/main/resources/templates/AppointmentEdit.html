@@ -1,0 +1,86 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+
+  <head>
+    <div th:replace="/fragments/commonui :: links"></div>
+  </head>
+
+  <body>
+   <div th:replace="/fragments/commonui :: menubar"></div>
+    <div class="container">
+      <div class="card">
+        <div class="card-header bg-primary text-center text-white">
+          <h3>Welcome To Appointment Edit Page</h3>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/appointment/update}" method="POST" th:object="${appointment}">
+            <!-- row#0-->
+            <div class="row">
+                        <div class="col-2">
+                            <label for="date">Id</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="text" th:field="*{id}" id="id" class="form-control" readonly />
+                        </div>
+                        <div class="col-6">
+                            <span id="idError"></span>
+                        </div>
+                </div>
+           		 <!-- row#0 -->
+                   <div class="row">
+                        <div class="col-2">
+                            <label for="date">DATE</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="date" th:field="*{date}" id="date" class="form-control" />
+                        </div>
+                        <div class="col-6">
+                            <span id="dateError"></span>
+                        </div>
+                </div>
+                <!-- row#1 -->
+                <div class="row">
+                    <div class="col-2">
+                        <label for="noOfSlots">NO OF SLOTS</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" th:field="*{noOfSlots}" id="noOfSlots"class="form-control"/>
+                    </div>
+                    <div class="col-6">
+                        <span id="noOfSlotsError"></span>
+                    </div>
+                </div>
+
+                 <!-- row#2 -->
+                 <div class="row">
+                    <div class="col-2">
+                        <label for="consultFee">CONSULTATION FEE</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" th:field="*{consultFee}" id="consultFee" class="form-control"/>
+                    </div>
+                    <div class="col-6">
+                        <span id="consultFeeError"></span>
+                    </div>
+                </div>
+
+                <!-- row#3 -->
+                <div class="row">
+                    <div class="col-2">
+                        <label for="note">DISCRIPTION</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" th:field="*{note}" id="note" class="form-control"/>
+                    </div>
+                    <div class="col-6">
+                        <span id="noteError"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">UPDATE</button>
+            </form>
+        </div>
+     <div th:if="${message!=null}" class="card-footer bg-secondary text-center text-white"><span th:text="${message}"></span></div>
+      </div>
+    </div>
+  </body>
+</html>
